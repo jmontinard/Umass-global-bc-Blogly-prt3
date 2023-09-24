@@ -1,0 +1,47 @@
+{% extends 'base.html'  %}
+{% block title %}{{ user.full_name }}{% endblock %}
+<!-- ask about getting user.get_fullname() -->
+
+{% block content %}
+<div class="row">
+
+    {% if user.image_url %}
+    <div class="card" style="width: 18rem;">
+        <img class='card-img-top' src="{{user.image_url}}" alt="{{ user.get_fullname }}" />
+    </div>
+    {% endif %}
+
+
+    <div class="card-body">
+        <h1 class="card-title">{{user.get_fullname}}</h1>
+
+        <form>
+        <button class="btn btn-primary"
+              formaction="/users/{{ user.id }}/edit"
+              formmethod="GET">Edit
+        </button>
+
+        <button class="btn btn-danger"
+            formaction="/users/{{ user.id }}/delete"
+            formmethod="POST">Delete</button>
+        </form>
+        
+        <h2 class="mt-4">Posts</h2>
+
+          <ul>
+            {% for post in user.posts %}
+                <li>
+                    <a href="/posts/{{ post.id}}">{{ post.title }}</a>
+
+                    <small>{{ post.friendly_date }}</small>
+                </li>
+             {% endfor %}
+         </ul>
+
+         <p><a href="/users/{{ user.id }}/posts/new" class="btn btn-primary">Add Post</a></p>
+
+    </div>
+
+</div>
+
+{% endblock %}
