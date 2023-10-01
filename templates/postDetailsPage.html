@@ -6,16 +6,17 @@
 <div class="post-card">
      <h1 class="title">{{post.title}}</h1>
      <h3 class="content">{{post.content}}</h3>
-     <h3 class="author">by {{post.user.get_fullname}} on {{post.friendly_date}}"</h3>
+     <h3 class="author">by {{post.user.get_fullname}} on {{post.friendly_date}}</h3>
     </div>
+    
+    {% if post.tags %}
     <ul>
-        <!-- <small>Tags:</small>
+        <small>Tags:</small>
     {%for tag in post.tags %}
-    <li><a href="{{tag.id}}">
-        {{tag.name}}
-    </a></li>
-    {%endfor%} -->
+    <li> <a href="/tags/{{ tag.id }}"><i class="badge badge-primary">{{ tag.name }}</i></a></li>
+    {%endfor%}
     </ul>
+    {% endif %}
         <form>
         <button class="btn btn-info" 
         formaction="/users/{{post.user_id}}"
